@@ -29,7 +29,7 @@ export const Editor = () => {
             className="editor"
         >
             <p>Click the text below to select and start editing</p>
-            <p>(Only text height and text aligment are implemented)</p>
+            <p>(Only text height and text alignment are implemented)</p>
             {state.data.map(i => {
                 return (
                     <Text
