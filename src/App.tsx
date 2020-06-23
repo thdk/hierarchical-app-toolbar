@@ -34,7 +34,7 @@ library.add(faCoffee,
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <EditorContextProvider>
         <Switch>
           <Route path="/todos">
