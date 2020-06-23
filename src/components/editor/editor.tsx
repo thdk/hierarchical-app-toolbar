@@ -28,6 +28,8 @@ export const Editor = () => {
         <div
             className="editor"
         >
+            <p>Click the text below to select and start editing</p>
+            <p>(Only text height and text aligment are implemented)</p>
             {state.data.map(i => {
                 return (
                     <Text
