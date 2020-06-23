@@ -1,0 +1,14 @@
+.editor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.editor .active {
+    border: 1px dashed blue;
+}
+
+.editor p, .editor h1, .editor h2, .editor h3, .editor h4, .editor h5, .editor h6 {
+    border: 1px solid white;
+    cursor: pointer;
+}

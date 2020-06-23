@@ -1,0 +1,17 @@
+.navigation-item {
+    display: flex;
+    justify-content: center;
+    padding: 0 1em 0 1em;
+    flex-shrink: 0;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navigation-item--active {
+    background-color: ghostwhite;
+}
+
+.navigation-item--active:hover,
+.navigation-item:hover {
+    background-color: gainsboro;
+}

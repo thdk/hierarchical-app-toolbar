@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { NavigationProvider } from './contexts/toolbar-context';
+import { TodoProvider } from './contexts/todo-context';
+import { ViewContextProvider } from './contexts/view-context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ViewContextProvider>
+      <TodoProvider>
+        <NavigationProvider
+          paths={[]}
+        >
+          <App />
+        </NavigationProvider>
+      </TodoProvider>
+    </ViewContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

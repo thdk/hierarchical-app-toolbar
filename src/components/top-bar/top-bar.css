@@ -1,0 +1,19 @@
+.top-bar {
+    width: 100%;
+    background: aquamarine;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-bar--contextual {
+    background-color: gold;
+}
+
+.top-bar__center {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar .svg-inline--fa {
+    padding: 1em;
+}

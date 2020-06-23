@@ -1,0 +1,24 @@
+.toolbar {
+    width: 100%;
+}
+
+.toolbar__items, .toolbar-siblings {
+    display: flex;
+    height: 60px;
+    overflow-x: scroll;
+    background-color: thistle;
+    width: 100%;
+}
+
+.toolbar__content {
+    display: flex;
+    background-color: floralwhite;
+    width: 100%;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.toolbar--closed {
+    display: none;
+}

@@ -1,0 +1,11 @@
+.menu {
+    display: none;
+    flex-direction: column;
+    width: 100px;
+    align-items: start;
+    padding: 1em;
+}
+
+.menu--open {
+    display: flex;
+}
