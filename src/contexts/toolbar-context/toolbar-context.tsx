@@ -5,6 +5,7 @@ export type NavigatorItem = {
     action?: React.ReactNode | (() => void);
     parent?: string;
     id: string;
+    wrapper?: (component: React.ReactNode) => React.ReactElement;
 }
 
 type NavigateOptions = {
@@ -15,19 +16,22 @@ export interface ToolbarContext {
     activePath?: string;
     navigateDown: (id: string) => void,
     navigateUp: (steps?: number) => void,
-    navigate: (id: string, options?: NavigateOptions) => void,
+    navigate: (id: string | undefined, options?: NavigateOptions) => void,
     navigation: NavigatorItem[],
     siblings: NavigatorItem[],
     navigationContent: React.ReactNode | (() => void),
     navigationTrail: (string | undefined)[],
     reset: (items: NavigatorItem[]) => void,
+    wrapper?: (component: React.ReactNode) => React.ReactElement,
 }
 
 function getBreadcrumbs(
     paths: Map<string, NavigatorItem>,
-    current: string,
+    current: string | undefined,
     { includeCurrent = true } = {},
 ): (string | undefined)[] {
+    if (!current) return [undefined];
+
     const navigation = paths.get(current);
     if (!navigation || !navigation.parent) {
         return includeCurrent
@@ -44,7 +48,7 @@ function getBreadcrumbs(
         : breadcrumbs;
 }
 
-function isChildOf(path: string, currentPath: string | undefined, paths: Map<string, NavigatorItem>): boolean {
+function isChildOf(path: string | undefined, currentPath: string | undefined, paths: Map<string, NavigatorItem>): boolean {
     if (!currentPath) {
         return false;
     }
@@ -93,13 +97,14 @@ export const NavigationProvider = ({
         throw new Error("No navigation items have been set up");
     }
 
-    let siblings: NavigatorItem[] = [];
     const current = allPaths.find(p => p.id === currentPath);
+
+    let siblings: NavigatorItem[] = [];
     if (current && current.parent) {
         siblings = allPaths.filter(p => p.parent === current.parent);
     }
 
-    const navigate = useCallback((path: string, options: NavigateOptions = {}) => {
+    const navigate = useCallback((path: string | undefined, options: NavigateOptions = {}) => {
         if (path === activePath) return;
 
         if (options.allowChild && isChildOf(path, activePath, toolbarPaths)) {
@@ -107,16 +112,22 @@ export const NavigationProvider = ({
         }
 
         setActivePath(path);
-        const nextNavigation = toolbarPaths.get(path);
-        if (!nextNavigation) {
-            throw new Error("No navigation items have been set up");
-        }
 
-        const { action } = nextNavigation;
+        if (path) {
+            const nextNavigation = toolbarPaths.get(path);
+            if (!nextNavigation) {
+                throw new Error("No navigation items have been set up");
+            }
 
-        if (isValidElement(action)) {
-            setToolbarcontent(action);
+            const { action } = nextNavigation;
+
+            if (isValidElement(action)) {
+                setToolbarcontent(action);
+            } else {
+                setToolbarcontent(undefined);
+            }
         } else {
+            // navigate to root
             setToolbarcontent(undefined);
         }
 
