@@ -1,7 +1,7 @@
 import React from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from "@fortawesome/free-solid-svg-icons";
-import { useEditorReducer } from "../../../contexts/editor-context";
+import { useHtmlReducer } from "../../../contexts/editor-context";
 import { useCallback } from "react";
 import { selectSelectedHtmlData } from "../../../core/editor/selector";
 import { Slider } from "../../slider";
@@ -9,10 +9,9 @@ import { Slider } from "../../slider";
 library.add(faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight);
 
 export const FontSizeSlider = () => {
-    const { state, dispatch } = useEditorReducer();
-    const html = selectSelectedHtmlData(state);
+    const { state, dispatch } = useHtmlReducer();
+    const selectedHtml = selectSelectedHtmlData(state);
     const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedHtml = selectSelectedHtmlData(state);
         if (!selectedHtml) {
             return;
         }
@@ -30,14 +29,14 @@ export const FontSizeSlider = () => {
             id,
         },
         )
-    }, [dispatch, state]);
+    }, [dispatch, selectedHtml]);
 
 
-    if (!html) {
-        return null;
+    if (!selectedHtml) {
+        return <p>Select some text first</p>
     }
 
-    const { style } = html;
+    const { style } = selectedHtml;
 
     const fontSize = +(style.fontSize || "").replace(/[A-Za-z]/g, '');
 

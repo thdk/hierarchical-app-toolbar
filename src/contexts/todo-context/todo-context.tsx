@@ -18,9 +18,9 @@ type TodoContextType = {
 
 const TodoContext = React.createContext({} as TodoContextType);
 
-export const TodoProvider = ({
+export const TodoProvider: React.FC = ({
     children,
-}: React.PropsWithChildren<{}>) => {
+}: React.PropsWithChildren<unknown>) => {
     const [todoFilter, setTodoFilter] = useState({
         completed: true,
     });

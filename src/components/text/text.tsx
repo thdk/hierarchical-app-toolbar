@@ -7,7 +7,7 @@ export const Text = ({
     ...restProps
 }: PropsWithChildren<{
     tag: HtmlTag,
-}> & HTMLProps<any>) => {
+}> & HTMLProps<HTMLHeadingElement | HTMLParagraphElement>) => {
     return (
         <Tag {...restProps}>
             {children}

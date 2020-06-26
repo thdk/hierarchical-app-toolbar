@@ -1,10 +1,9 @@
-import { EditorState } from "../reducer";
-import { HtmlData } from "../types";
+import { EditorState } from "../reducer/editor-reducer";
 
-export function selectSelectedHtmlData(state: EditorState): HtmlData | undefined {
-    const id = state.selectedId;
+export function selectHtmlState(state: EditorState) {
+    return state.html;
+}
 
-    if (!id) return undefined;
-
-    return state.data.find(i => i.id === id);
+export function selectPhotosState(state: EditorState) {
+    return state.photos;
 }

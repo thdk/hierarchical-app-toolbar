@@ -1,1 +1,1 @@
-export * from "./editor-reducer";
+export * from "./html-reducer";

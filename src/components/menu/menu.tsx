@@ -11,7 +11,7 @@ export const Menu = () => {
 
     const { closeMenu } = useViewContext();
 
-    const onClick = useCallback((e: React.MouseEvent) => {
+    const onClick = useCallback(() => {
         closeMenu();
     }, [closeMenu]);
 

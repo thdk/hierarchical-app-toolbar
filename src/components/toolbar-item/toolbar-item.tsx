@@ -1,22 +1,19 @@
-import React from "react";
-import { useToolbar } from "../../contexts/toolbar-context";
+import React, { HTMLProps } from "react";
 
 import "./navigation-item.css";
 import classNames from "classnames";
 
 export const ToolbarItem = ({
-    itemId,
     children,
     isActive = false,
-}: React.PropsWithChildren<{
-    itemId: string,
+    className,
+    ...restProps
+}: HTMLProps<HTMLDivElement> & {
     isActive?: boolean,
-}>) => {
-    const {
-        navigateDown,
-    } = useToolbar();
+}) => {
 
     const cssClass = classNames([
+        className,
         "navigation-item",
         {
             "navigation-item--active": isActive,
@@ -25,8 +22,8 @@ export const ToolbarItem = ({
 
     return (
         <div
-            onClick={navigateDown.bind(null, itemId)}
             className={cssClass}
+            {...restProps}
         >
             {children}
         </div>

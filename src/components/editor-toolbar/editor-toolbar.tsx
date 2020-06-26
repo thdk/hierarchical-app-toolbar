@@ -3,7 +3,8 @@ import React from "react";
 import { Button } from "../button";
 import { text } from "./text";
 import { photoToolbar } from "./photo-toolbar";
-import {faCameraRetro, faQuoteRight} from "@fortawesome/free-solid-svg-icons";
+import { faCameraRetro, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
+import { NavigatorItem } from "../../contexts/toolbar-context";
 
 export const editorToolbar = [
     {
@@ -16,4 +17,4 @@ export const editorToolbar = [
     },
     ...text,
     ...photoToolbar,
-];
+] as NavigatorItem[];

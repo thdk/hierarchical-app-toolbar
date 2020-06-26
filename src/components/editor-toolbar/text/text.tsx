@@ -4,6 +4,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeading, faTextWidth, faTextHeight, faParagraph, faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import { Slider } from "../../slider";
 import { FontSizeSlider } from "./font-size";
+import { NavigatorItem } from "../../../contexts/toolbar-context";
 
 library.add(faHeading, faTextWidth, faTextHeight, faParagraph, faAlignCenter);
 
@@ -11,13 +12,13 @@ const parent = "text";
 export const textMain = [
     {
         button: <Button icon="text-width" text="Text width" />,
-        action: <Slider min={1} max={30} value={13} />,
+        content: <Slider min={1} max={30} value={13} />,
         parent,
         id: "text-width",
     },
     {
         button: <Button icon="text-height" text="Text height" />,
-        action: <FontSizeSlider />,
+        content: <FontSizeSlider />,
         parent,
         id: "text-height",
     },
@@ -25,6 +26,7 @@ export const textMain = [
         button: <Button icon="align-center" text="Text alignment" />,
         parent,
         id: "text-alignment",
+        showSiblings: true,
     },
     {
         button: <Button icon="heading" text="Heading" />,
@@ -36,4 +38,4 @@ export const textMain = [
         parent,
         id: "paragraph",
     },
-];
+] as NavigatorItem[];

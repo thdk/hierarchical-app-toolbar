@@ -4,7 +4,7 @@ import "./editor.css";
 import { useCallback } from "react";
 import { useToolbar } from "../../contexts/toolbar-context";
 import { Text } from "../text";
-import { useEditorReducer } from "../../contexts/editor-context";
+import { useHtmlReducer } from "../../contexts/editor-context";
 
 export const Editor = () => {
     const {
@@ -14,7 +14,7 @@ export const Editor = () => {
     const {
         state,
         dispatch
-    } = useEditorReducer();
+    } = useHtmlReducer();
 
     const onClick = useCallback((id: string) => {
         navigate("text", { allowChild: true });

@@ -3,7 +3,7 @@ import { library, IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "../../button";
-import { useEditorReducer } from "../../../contexts/editor-context";
+import { useHtmlReducer } from "../../../contexts/editor-context";
 import { selectSelectedHtmlData } from "../../../core/editor/selector";
 import { HtmlData } from "../../../core/editor/types";
 
@@ -47,7 +47,7 @@ const AlignmentButton = ({
 }: {
     alignment: keyof typeof alignmentData;
 }) => {
-    const { state, dispatch } = useEditorReducer();
+    const { state, dispatch } = useHtmlReducer();
     const { icon, text, style: alignmentStyle } = alignmentData[alignment];
     const current = selectSelectedHtmlData(state);
     const { style, id } = current || {};
@@ -68,7 +68,7 @@ const AlignmentButton = ({
         && current.style
         && Array.from(Object.keys(alignmentStyle))
             .every((key => {
-                return (alignmentStyle as any)[key] === (current.style as any)[key]
+                return (alignmentStyle)[key as keyof typeof alignmentStyle] === (current.style)[key as keyof typeof current.style]
             }));
 
     const buttonStyle: CSSProperties = {

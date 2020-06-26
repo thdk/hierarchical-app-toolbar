@@ -10,7 +10,7 @@ const ViewContext = React.createContext({} as ViewContextProps);
 
 export const ViewContextProvider = ({
     children,
-}: React.PropsWithChildren<{}>) => {
+}: React.PropsWithChildren<unknown>) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const context = {

@@ -5,7 +5,7 @@ import { Layout } from "../layout";
 import { useEffect } from "react";
 import { useToolbar } from "../../contexts/toolbar-context";
 import { editorToolbar } from "../editor-toolbar";
-import { useEditorReducer } from "../../contexts/editor-context";
+import { useHtmlReducer } from "../../contexts/editor-context";
 import { HtmlData } from "../../core/editor/types";
 
 
@@ -44,8 +44,8 @@ export const EditorScreen = () => {
         reset,
     } = useToolbar();
 
-    const { state, dispatch } = useEditorReducer();
-    const { defaultStyle } = state;
+    const { state, dispatch } = useHtmlReducer();
+    const { defaultStyle } =  state;
 
     useEffect(() => {
         reset(editorToolbar);

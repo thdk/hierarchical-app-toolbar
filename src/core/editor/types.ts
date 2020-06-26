@@ -5,3 +5,8 @@ export interface HtmlData {
     id: string;
     style: Omit<React.CSSProperties, "fontSize"> & { fontSize?: string };
 }
+
+export type Photo = {
+    title: string;
+    thumbnailUrl: string;
+};

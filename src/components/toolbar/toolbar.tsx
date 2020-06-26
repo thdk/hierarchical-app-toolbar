@@ -6,11 +6,13 @@ import "./toolbar.css";
 import classNames from "classnames";
 
 export const Toolbar = () => {
+    const toolbar = useToolbar();
     const {
         activePath,
         navigationContent,
         navigation,
-    } = useToolbar();
+        navigateDown,
+    } = toolbar;
 
     const cssClass = classNames([
         "toolbar",
@@ -31,11 +33,11 @@ export const Toolbar = () => {
 
             <div className="toolbar__items">
                 {
-                    navigation.map(({ button, id, action }) => (
+                    navigation.map(({ button, id, content, navigate = true }) => (
                         <ToolbarItem
                             key={id}
-                            itemId={id}
-                            isActive={!!action && activePath === id}
+                            isActive={!!content && activePath === id}
+                            onClick={navigate ? () => navigateDown(id) : undefined}
                         >
                             {button}
                         </ToolbarItem>

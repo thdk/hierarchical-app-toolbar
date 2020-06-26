@@ -8,7 +8,7 @@ import { ToolbarSiblings } from "../toolbar/toolbar-siblings";
 
 export const Layout = ({
     children,
-}: PropsWithChildren<{}>) => {
+}: PropsWithChildren<unknown>) => {
     return (
         <div className="app">
             <TopBar />

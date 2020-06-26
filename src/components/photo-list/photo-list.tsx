@@ -1,22 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { usePhotosReducer } from "../../contexts/editor-context";
 
 export const PhotoList = () => {
-    const [
-        photos,
-        setPhotos,
-    ] = useState([] as any[]);
+    const { state: { photos } } = usePhotosReducer();
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/photos?albumId=6')
-            .then(response => response.json())
-            .then(json => {
-                console.log({ json });
-                setPhotos(json);
-            });
-
-    }, [setPhotos]);
     return (
         <>
             {photos.map((p, index) => {
