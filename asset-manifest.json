@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/hierarchical-app-toolbar/static/css/main.d8d6eec4.chunk.css",
-    "main.js": "/hierarchical-app-toolbar/static/js/main.d09d95ca.chunk.js",
-    "main.js.map": "/hierarchical-app-toolbar/static/js/main.d09d95ca.chunk.js.map",
+    "main.js": "/hierarchical-app-toolbar/static/js/main.bbc54b61.chunk.js",
+    "main.js.map": "/hierarchical-app-toolbar/static/js/main.bbc54b61.chunk.js.map",
     "runtime-main.js": "/hierarchical-app-toolbar/static/js/runtime-main.52a8ec1b.js",
     "runtime-main.js.map": "/hierarchical-app-toolbar/static/js/runtime-main.52a8ec1b.js.map",
-    "static/js/2.62371999.chunk.js": "/hierarchical-app-toolbar/static/js/2.62371999.chunk.js",
-    "static/js/2.62371999.chunk.js.map": "/hierarchical-app-toolbar/static/js/2.62371999.chunk.js.map",
+    "static/js/2.96fab02e.chunk.js": "/hierarchical-app-toolbar/static/js/2.96fab02e.chunk.js",
+    "static/js/2.96fab02e.chunk.js.map": "/hierarchical-app-toolbar/static/js/2.96fab02e.chunk.js.map",
     "index.html": "/hierarchical-app-toolbar/index.html",
-    "precache-manifest.240279d16c0a5e8c5fa9e8c7525c0851.js": "/hierarchical-app-toolbar/precache-manifest.240279d16c0a5e8c5fa9e8c7525c0851.js",
+    "precache-manifest.5ce1ee002ee7a25383177b018b9ac398.js": "/hierarchical-app-toolbar/precache-manifest.5ce1ee002ee7a25383177b018b9ac398.js",
     "service-worker.js": "/hierarchical-app-toolbar/service-worker.js",
     "static/css/main.d8d6eec4.chunk.css.map": "/hierarchical-app-toolbar/static/css/main.d8d6eec4.chunk.css.map",
-    "static/js/2.62371999.chunk.js.LICENSE.txt": "/hierarchical-app-toolbar/static/js/2.62371999.chunk.js.LICENSE.txt"
+    "static/js/2.96fab02e.chunk.js.LICENSE.txt": "/hierarchical-app-toolbar/static/js/2.96fab02e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.52a8ec1b.js",
-    "static/js/2.62371999.chunk.js",
+    "static/js/2.96fab02e.chunk.js",
     "static/css/main.d8d6eec4.chunk.css",
-    "static/js/main.d09d95ca.chunk.js"
+    "static/js/main.bbc54b61.chunk.js"
   ]
 }
