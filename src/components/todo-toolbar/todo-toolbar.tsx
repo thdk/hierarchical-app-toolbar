@@ -3,7 +3,7 @@ import React from "react";
 import { TodoFilterCompleted } from "../todo-filters";
 import { recipes } from "./recipes";
 import { faRobot, faUtensils, faListUl, faAmbulance } from "@fortawesome/free-solid-svg-icons";
-import { NavigatorItem, useToolbar } from "../../contexts/toolbar-context";
+import { useToolbar } from "../../contexts/toolbar-context";
 import { useCallback } from "react";
 import { useState } from "react";
 
@@ -50,4 +50,4 @@ export const todoToolbar = [
         button: <RecipesButton />,
         id: "recipes",
     },
-] as NavigatorItem[];
+];

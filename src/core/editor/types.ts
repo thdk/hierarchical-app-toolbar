@@ -3,7 +3,11 @@ export interface HtmlData {
     tag: HtmlTag;
     content: React.ReactNode;
     id: string;
-    style: Omit<React.CSSProperties, "fontSize"> & { fontSize?: string };
+    style: Omit<React.CSSProperties, "fontSize" | "letterSpacing">
+    & {
+        fontSize?: string,
+        letterSpacing?: string,
+    };
 }
 
 export type Photo = {

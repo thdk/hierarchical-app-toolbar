@@ -1,9 +1,9 @@
 import React, { HTMLProps } from "react";
 
-import "./navigation-item.css";
+import "./toolbar-button.css";
 import classNames from "classnames";
 
-export const ToolbarItem = ({
+export const ToolbarButton = ({
     children,
     isActive = false,
     className,
@@ -14,9 +14,9 @@ export const ToolbarItem = ({
 
     const cssClass = classNames([
         className,
-        "navigation-item",
+        "toolbar-button",
         {
-            "navigation-item--active": isActive,
+            "toolbar-button--active": isActive,
         },
     ]);
 

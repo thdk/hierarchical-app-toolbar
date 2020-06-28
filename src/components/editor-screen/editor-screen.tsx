@@ -17,6 +17,7 @@ const html = [
         style: {
             textAlign: "left",
             fontSize: "28px",
+            letterSpacing: "1px",
         },
     },
     {
@@ -26,6 +27,7 @@ const html = [
         style: {
             textAlign: "left",
             fontSize: "22px",
+            letterSpacing: "1px",
         },
     },
     {
@@ -35,6 +37,7 @@ const html = [
         style: {
             textAlign: "left",
             fontSize: "18px",
+            letterSpacing: "1px",
         },
     },
 ] as HtmlData[];

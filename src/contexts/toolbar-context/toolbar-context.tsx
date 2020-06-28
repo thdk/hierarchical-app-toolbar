@@ -2,13 +2,14 @@ import React, { useCallback, useMemo } from "react";
 import { ReactNode } from "react";
 import { useReducer } from "react";
 
-export type NavigatorItem = {
+export type ToolbarButton = {
     button: React.ReactNode;
     content?: React.ReactNode;
     parent?: string;
     id: string;
-    navigate?: boolean;
     showSiblings?: boolean;
+    navigate?: boolean;
+    render?: (toolbar: ToolbarContext, id: string, button: React.ReactNode) => ReactNode;
 }
 
 type NavigateOptions = {
@@ -20,17 +21,17 @@ export interface ToolbarContext {
     navigateDown: (id: string) => void,
     navigateUp: (steps?: number) => void,
     navigate: (id: string | undefined, options?: NavigateOptions) => void,
-    navigation: NavigatorItem[],
-    allPaths: NavigatorItem[],
+    buttons: ToolbarButton[],
+    allPaths: ToolbarButton[],
     navigationContent: React.ReactNode | (() => void),
     navigationTrail: (string | undefined)[],
-    reset: (items: NavigatorItem[]) => void,
-    add: (items: NavigatorItem[]) => void,
-    get: (path: string) => NavigatorItem,
+    reset: (items: ToolbarButton[]) => void,
+    add: (items: ToolbarButton[]) => void,
+    get: (path: string) => ToolbarButton,
 }
 
 function getBreadcrumbs(
-    paths: Map<string, NavigatorItem>,
+    paths: Map<string, ToolbarButton>,
     current: string | undefined,
     { includeCurrent = true } = {},
 ): (string | undefined)[] {
@@ -52,7 +53,7 @@ function getBreadcrumbs(
         : breadcrumbs;
 }
 
-function isChildOf(path: string | undefined, currentPath: string | undefined, paths: Map<string, NavigatorItem>): boolean {
+function isChildOf(path: string | undefined, currentPath: string | undefined, paths: Map<string, ToolbarButton>): boolean {
     if (!currentPath) {
         return false;
     }
@@ -79,16 +80,16 @@ const ToolbarContext = React.createContext({} as ToolbarContext);
 type ToolbarAction =
     { type: "navigate", payload: { id: string | undefined } } |
     { type: "close-content" } |
-    { type: "reset", payload: { items: NavigatorItem[] } } |
-    { type: "add", payload: { items: NavigatorItem[] } }
+    { type: "reset", payload: { items: ToolbarButton[] } } |
+    { type: "add", payload: { items: ToolbarButton[] } }
     ;
 
 type ToolbarState = {
     trail: (string | undefined)[];
     content: ReactNode | undefined;
     active: string | undefined;
-    paths: Map<string, NavigatorItem>;
-    navigation: NavigatorItem[];
+    paths: Map<string, ToolbarButton>;
+    buttons: ToolbarButton[];
 }
 
 
@@ -160,11 +161,11 @@ const pathsReducer = (state: ToolbarState, action: ToolbarAction) => {
     }
 };
 
-const navigationReducer = (state: ToolbarState, action: ToolbarAction) => {
+const buttonsReducer = (state: ToolbarState, action: ToolbarAction) => {
     switch (action.type) {
         case "navigate": {
             if (action.payload.id === state.active) {
-                return state.navigation;
+                return state.buttons;
             }
 
             const paths = Array.from(state.paths.values());
@@ -187,7 +188,7 @@ const navigationReducer = (state: ToolbarState, action: ToolbarAction) => {
                 .filter(path => path.parent === undefined);
         }
         default:
-            return state.navigation;
+            return state.buttons;
     }
 };
 
@@ -197,27 +198,27 @@ const toolbarReducer = (state: ToolbarState, action: ToolbarAction): ToolbarStat
         trail: trailReducer(state, action),
         content: contentReducer(state, action),
         paths: pathsReducer(state, action),
-        navigation: navigationReducer(state, action),
+        buttons: buttonsReducer(state, action),
     };
 };
 
 export const NavigationProvider = ({
     children,
 }: React.PropsWithChildren<{
-    paths: NavigatorItem[],
+    paths: ToolbarButton[],
 }>) => {
     const [{
         active,
         content,
         trail,
         paths,
-        navigation,
+        buttons,
     }, dispatch] = useReducer<typeof toolbarReducer>(toolbarReducer, {
         trail: [undefined],
         paths: new Map(),
         content: null,
         active: undefined,
-        navigation: [],
+        buttons: [],
     });
 
     const allPaths = useMemo(() => {
@@ -275,7 +276,7 @@ export const NavigationProvider = ({
 
     }, [active]);
 
-    const reset = useCallback((items: NavigatorItem[]) => {
+    const reset = useCallback((items: ToolbarButton[]) => {
         dispatch({
             type: "reset",
             payload: {
@@ -284,7 +285,7 @@ export const NavigationProvider = ({
         });
     }, []);
 
-    const add = useCallback((items: NavigatorItem[]) => {
+    const add = useCallback((items: ToolbarButton[]) => {
         dispatch({
             type: "add",
             payload: {
@@ -301,7 +302,7 @@ export const NavigationProvider = ({
         navigate,
         navigateDown,
         navigateUp,
-        navigation,
+        buttons,
         navigationContent: content,
         navigationTrail: trail,
         reset,

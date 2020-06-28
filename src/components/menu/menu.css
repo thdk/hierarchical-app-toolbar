@@ -9,3 +9,7 @@
 .menu--open {
     display: flex;
 }
+
+.menu a {
+    padding: 1em;
+}

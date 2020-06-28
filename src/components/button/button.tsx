@@ -22,7 +22,7 @@ export const Button = ({
                 icon={icon}
             />
             <span
-                className="navigation-button__text"
+                className="button__text"
             >
                 {text}
             </span>

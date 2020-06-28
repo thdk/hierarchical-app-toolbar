@@ -50,7 +50,6 @@ const parent = "photo";
 export const photoToolbar = [
     {
         button: <FilmrollButton />,
-        navigate: false,
         content: <PhotoList />,
         id: "filmroll",
         parent,
@@ -59,24 +58,20 @@ export const photoToolbar = [
         button: <Button icon={faFacebook} text="Facebook" />,
         id: "facebook",
         parent,
-        navigate: false,
     },
     {
         button: <Button icon={faGoogle} text="Google" />,
         id: "google",
         parent,
-        navigate: false,
     },
     {
         button: <Button icon={faFlickr} text="Flickr" />,
         id: "flickr",
         parent,
-        navigate: false,
     },
     {
         button: <Button icon={faInstagram} text="Instagram" />,
         id: "instagram",
         parent,
-        navigate: false,
     },
 ];

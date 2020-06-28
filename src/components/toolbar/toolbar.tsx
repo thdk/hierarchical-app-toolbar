@@ -1,6 +1,6 @@
 import React from "react";
 import { useToolbar } from "../../contexts/toolbar-context";
-import { ToolbarItem } from "../toolbar-item";
+import { ToolbarButton } from "../toolbar-button";
 
 import "./toolbar.css";
 import classNames from "classnames";
@@ -10,14 +10,14 @@ export const Toolbar = () => {
     const {
         activePath,
         navigationContent,
-        navigation,
+        buttons,
         navigateDown,
     } = toolbar;
 
     const cssClass = classNames([
         "toolbar",
         {
-            "toolbar--closed": !navigation.length,
+            "toolbar--closed": !buttons.length,
         },
     ]);
 
@@ -33,15 +33,21 @@ export const Toolbar = () => {
 
             <div className="toolbar__items">
                 {
-                    navigation.map(({ button, id, content, navigate = true }) => (
-                        <ToolbarItem
-                            key={id}
-                            isActive={!!content && activePath === id}
-                            onClick={navigate ? () => navigateDown(id) : undefined}
-                        >
-                            {button}
-                        </ToolbarItem>
-                    ))
+                    buttons.map((
+                        {
+                            button,
+                            id,
+                            content,
+                            navigate = true,
+                        }) => (
+                            <ToolbarButton
+                                key={id}
+                                isActive={!!content && activePath === id}
+                                onClick={navigate ? () => navigateDown(id) : undefined}
+                            >
+                                {button}
+                            </ToolbarButton>
+                        ))
                 }
             </div>
         </div>

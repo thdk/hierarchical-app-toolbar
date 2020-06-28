@@ -1,6 +1,6 @@
 import React from "react";
 import { useToolbar } from "../../contexts/toolbar-context";
-import { ToolbarItem } from "../toolbar-item";
+import { ToolbarButton } from "../toolbar-button";
 
 export const ToolbarSiblings = () => {
     const {
@@ -24,13 +24,13 @@ export const ToolbarSiblings = () => {
                 {
                     siblings.map(({ button, id
                     }) => (
-                            <ToolbarItem
+                            <ToolbarButton
                                 key={id}
                                 isActive={navigationTrail.indexOf(id) !== -1}
                                 onClick={() => navigate(id)}
                             >
                                 {button}
-                            </ToolbarItem>
+                            </ToolbarButton>
                         ))
                 }
             </div>

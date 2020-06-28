@@ -1,40 +1,35 @@
-import React, { CSSProperties, useCallback } from "react";
-import { library, IconProp } from "@fortawesome/fontawesome-svg-core";
+import React from "react";
 import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from "@fortawesome/free-solid-svg-icons";
 
-import { Button } from "../../button";
-import { useHtmlReducer } from "../../../contexts/editor-context";
-import { selectSelectedHtmlData } from "../../../core/editor/selector";
-import { HtmlData } from "../../../core/editor/types";
-
-library.add(faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight);
+import { CssData } from "./types";
+import { CssButton } from "../css-button";
 
 const parent = "text-alignment";
 
-const alignmentData: { [key: string]: { icon: IconProp, text: string, style: Partial<HtmlData["style"]> } } = {
+const alignmentData: { [key: string]: CssData } = {
     "justify": {
-        icon: "align-justify",
+        icon: faAlignJustify,
         text: "Justify",
         style: {
             textAlign: "justify",
         },
     },
     "left": {
-        icon: "align-left",
+        icon: faAlignLeft,
         text: "Left",
         style: {
             textAlign: "left",
         },
     },
     "right": {
-        icon: "align-right",
+        icon: faAlignRight,
         text: "Right",
         style: {
             textAlign: "right",
         },
     },
     "center": {
-        icon: "align-center",
+        icon: faAlignCenter,
         text: "Center",
         style: {
             textAlign: "center",
@@ -42,68 +37,29 @@ const alignmentData: { [key: string]: { icon: IconProp, text: string, style: Par
     },
 }
 
-const AlignmentButton = ({
-    alignment
-}: {
-    alignment: keyof typeof alignmentData;
-}) => {
-    const { state, dispatch } = useHtmlReducer();
-    const { icon, text, style: alignmentStyle } = alignmentData[alignment];
-    const current = selectSelectedHtmlData(state);
-    const { style, id } = current || {};
-
-    const onClick = useCallback(() => {
-        if (id) {
-            dispatch({
-                type: "update-html",
-                data: {
-                    style: { ...style, ...alignmentStyle }
-                },
-                id,
-            });
-        }
-    }, [dispatch, alignmentStyle, id, style]);
-
-    const isActive = current
-        && current.style
-        && Array.from(Object.keys(alignmentStyle))
-            .every((key => {
-                return (alignmentStyle)[key as keyof typeof alignmentStyle] === (current.style)[key as keyof typeof current.style]
-            }));
-
-    const buttonStyle: CSSProperties = {
-        fontWeight: isActive ? "bold" : "normal",
-    };
-
-    return (
-        <Button
-            style={buttonStyle}
-            icon={icon}
-            text={text}
-            onClick={onClick}
-        />
-    );
-}
-
 export const textAlignment = [
     {
-        button: <AlignmentButton alignment="justify" />,
+        button: <CssButton data={alignmentData["justify"]} />,
         parent,
         id: "align-justify",
+        navigate: false,
     },
     {
-        button: <AlignmentButton alignment="left" />,
+        button: <CssButton data={alignmentData["left"]} />,
         parent,
         id: "align-left",
+        navigate: false,
     },
     {
-        button: <AlignmentButton alignment="center" />,
+        button: <CssButton data={alignmentData["center"]} />,
         parent,
         id: "align-center",
+        navigate: false,
     },
     {
-        button: <AlignmentButton alignment="right" />,
+        button: <CssButton data={alignmentData["right"]} />,
         parent,
         id: "align-right",
+        navigate: false,
     },
 ];

@@ -2,9 +2,9 @@ import { Button } from "../../button";
 import React from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeading, faTextWidth, faTextHeight, faParagraph, faAlignCenter } from "@fortawesome/free-solid-svg-icons";
-import { Slider } from "../../slider";
-import { FontSizeSlider } from "./font-size";
-import { NavigatorItem } from "../../../contexts/toolbar-context";
+import { ToolbarButton } from "../../../contexts/toolbar-context";
+import { CssButton } from "../css-button";
+import { PixelSlider } from "../../pixel-slider";
 
 library.add(faHeading, faTextWidth, faTextHeight, faParagraph, faAlignCenter);
 
@@ -12,13 +12,13 @@ const parent = "text";
 export const textMain = [
     {
         button: <Button icon="text-width" text="Text width" />,
-        content: <Slider min={1} max={30} value={13} />,
+        content: <PixelSlider cssProperty={"letterSpacing"} />,
         parent,
         id: "text-width",
     },
     {
         button: <Button icon="text-height" text="Text height" />,
-        content: <FontSizeSlider />,
+        content: <PixelSlider cssProperty={"fontSize"} />,
         parent,
         id: "text-height",
     },
@@ -32,10 +32,22 @@ export const textMain = [
         button: <Button icon="heading" text="Heading" />,
         parent,
         id: "heading",
+        showSiblings: true,
     },
     {
-        button: <Button icon="paragraph" text="Paragraph" />,
+        navigate: false,
+        button: <CssButton
+            data={{
+                icon: "paragraph",
+                text: "Paragraph",
+                style: {
+                    fontSize: "12px",
+                    padding: 0,
+                    fontWeight: "normal",
+                    letterSpacing: "1px",
+                }
+            }} />,
         parent,
         id: "paragraph",
     },
-] as NavigatorItem[];
+] as ToolbarButton[];

@@ -1,4 +1,4 @@
-.navigation-item {
+.toolbar-button {
     display: flex;
     justify-content: center;
     padding: 0 1em 0 1em;
@@ -7,11 +7,11 @@
     cursor: pointer;
 }
 
-.navigation-item--active {
+.toolbar-button--active {
     background-color: ghostwhite;
 }
 
-.navigation-item--active:hover,
-.navigation-item:hover {
+.toolbar-button--active:hover,
+.toolbar-button:hover {
     background-color: gainsboro;
 }
